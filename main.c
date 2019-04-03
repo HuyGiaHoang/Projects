@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <signal.h>
 #include "screen.h"
 #include "sound.h"
 
 
 int main(){
 	FILE *f;
-	short sd[80000];
+	short sd[RATE];
 	for(;;){
-	system(RCMD);
-	f = fopen("test.wav", "r");
+		int ret = system(RCMD);
+		if(ret == SIGINT) break;
+		f = fopen("test.wav", "r");
 		if(f==NULL){
 			printf("Cannot open the file\n");
 			return 1;
@@ -21,7 +23,7 @@ int main(){
 //	for(i=0; i<COL; i++) dec[i]= rand()%70+30;
 
 		clearScreen();
-		setColors(RED, bg(PINK));
+		setColors(RED, bg(YELLOW));
 //	barChart(dec);
 
 		struct WAVHDR hdr;
@@ -30,8 +32,8 @@ int main(){
 		fclose(f);
 
 		displayWAVHDR(hdr);
-		displayWAVDATA();
+		displayWAVDATA(sd);
 	}
 	resetColors();
-	getchar();
+//	getchar();
 }
