@@ -30,7 +30,7 @@ void sendDATA(short s[]){
 	curl_global_init(CURL_GLOBAL_ALL);
     CURL *c = curl_easy_init();
     if(c){
-        curl_easy_setopt(c, CURLOPT_URL, "http://www.cc.puv.fi/~e1800961/curl.php");
+        curl_easy_setopt(c, CURLOPT_URL, "http://www.cc.puv.fi/~e1800961/sound.php");
         curl_easy_setopt(c, CURLOPT_POSTFIELDS, postdata);
         CURLcode res = curl_easy_perform(c);
         if(res != CURLE_OK) printf("Communication is not OK\n");
