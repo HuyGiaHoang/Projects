@@ -3,6 +3,64 @@
 #include <math.h>
 #include "screen.h"
 
+void fillID(char *d, const char *s)
+{
+	for(int i = 0; i < 4; i++) *d++=*s++;
+}
+
+void testTone(int c, int fl, int fr, float d)
+{
+	if(c<1 || c>2){
+		printf("Wrong number of channels.\n");
+		return;
+	}
+	if(fl<50 || fl>16000){
+		printf("Frequency is out of range.\n");
+		return;
+	}
+	if(d<1.0 || d>10){
+        printf("Wrong duration.\n");
+        return;
+    }
+	// all the arguments are OK, the rest of the code is to
+	// 1) make a correct wave header. 2) penerate correct samples
+	// 3) write both header and samples to a file
+	struct WAVHDR h;
+	int samples = 44100*d;
+
+	fillID(h.ChunkID, "RIFF");
+	fillID(h.Format, "WAVE");
+	fillID(h.Subchunk1ID, "fmt ");
+	fillID(h.Subchunk2ID, "data");
+	h.Subchunk1Size = 16;		// constant value
+	h.Audio = 1;
+	h.SampleRate = 44100;
+	h.BitsPerSample = 16;
+	h.BlockAlign = c*16/8;
+	h.NumChannels = c;
+	h.ByteRate = 44100*c*16/8;
+
+	h.Subchunk2Size = samples*c*16/8;
+	h.ChunkSize = h.Subchunk2Size + 36;
+	FILE *fp = fopen("testTone.wav", "w");
+	if(fp == NULL){
+		printf("Cannot open the file\n");
+		return;
+	}
+	fwrite(&h, sizeof(h), 1, fp);	// write the header to the file
+	// generate samples, and write to file
+	for(int i=0; i<samples; i++){
+		short sL = sin(2*PI*fl*i/44100);
+		fwrite(&sL, sizeof(short), 1, fp);
+		if(c==2){
+			short sR = 32767.0 * sin(2*PI*fr*i/44100);
+			fwrite(&sR, sizeof(short), 1, fp);
+		}
+	}	// end of for
+	fclose(fp);	// close the file
+	printf("TestTone is generate\n");
+}
+
 void showID(char *idname, char *id){
 	int i;
 	printf("%s : ", idname);
