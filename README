@@ -1,1 +1,41 @@
-# This is application development ver 1
+# This is application development ver 1.1
+
+This application offers a possibility to turn a Raspberry Pi as a sound device. The 
+application comes with 2 functions: a sound collector and a test tone generator.
+
+List of content:
+	1. Configuration Instructions
+	2. Installation Instructions
+	3. Operation Instructions
+	4. List of Files
+	5. Copyright / Copyleft
+	6. Contact Information
+	7. Credits and Acknowledgements 
+
+
+1. Configuration Instructions:
+
+2. Installation Instructions:
+
+3. Operation Instructions:
+
+4. List of Files:
+	makefile: for cleaning and compile files
+	main.c: main structure with functions and display
+	README: file about instructions
+	screen.c: c file for displaying bar chart for sound level
+	screen.h: defines for screen.c
+	sound.h: defines for sound.c
+	sound.c: c file containing functions for showing information of collected sound
+		and for the test tone generator
+	comm.h: defines for comm.c
+	comm.c: c file contains function definition for sendDATA(), this function will 
+		calculate 16000 sample for 8 pieces of Faster decibel values and send them 
+		using curl library function to an URL
+	sound.php: show details of tracking sound information on sever
+
+5. Copyright
+
+6. Contact Information:
+
+7. Credits and Acknowledgements
