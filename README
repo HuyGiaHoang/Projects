@@ -14,10 +14,47 @@ List of content:
 
 
 1. Configuration Instructions:
-
+	Write on Linux, Raspbian OS in C language
+	Use libcurl
+	Use Raspberry Pi, soundcard, SD card, speakers, microphone
+	
 2. Installation Instructions:
+	Set-up Raspbian OS in your SD card:
+		Insert SD-card adapter into the SD-card slot of your PC or card-reader, 
+			the system will inform you a USB storage device is available
+		Go to website: https://www.raspberrypi.org/downloads/noobs/ and dowload
+			ZIP file of "Noobs" and open
+		Copy everything to your SD card
+		Go to http://www.cc.puv.fi/~e1800961/ then dowload the instruction: RPi3boot.docx
+			and follow the instruction
 
 3. Operation Instructions:
+	SOUND COLLECTOR:
+		You need a soundcard with Microphone connected to the raspberry pi
+
+		Run "cd AppDev" command
+		Run "make clean" command to remove all the previous compiled files to the origin
+		Run "nano sound.h" command, choose whether using Developing mode or not by use the
+			#define DEBUG or not
+		Run "make" command to recompile the files needed
+		Run "./sound.out" command to run the sound collector
+		Use Crtl+C command to stop the program
+		Run "clear" command to clear the screen
+
+	TEST TONE GENERATOR:
+		You need a soundcard with Speakers connected to the raspberry pi
+
+		Run "cd AppDev" command
+        Run "make clean" command to remove all the previous compiled files to the origin
+		Run "make" command to recompile the files needed
+		Run "./sound.out .." while .. is any argument to run the test tone generator
+		Choose numbers of channel 1 or 2
+		If 2, choose the Left and Right frequency for 2 speakers, else choose 1 frequency
+		Choose the duration of sound(from 1 to 10 sec)
+		Then the testTone.wav is generated
+		Now you should copy the generated testTone.wav to a remote sever by using 
+			"scp testTone.wav yourEmail@zxc.zxc.zxc:." command
+		Now connect to your remote account to listen to the testTone.wav
 
 4. List of Files:
 	makefile: for cleaning and compile files
@@ -34,8 +71,13 @@ List of content:
 		using curl library function to an URL
 	sound.php: show details of tracking sound information on sever
 
-5. Copyright
+5. Copyleft
 
 6. Contact Information:
+	Author: Gia Huy Hoang
+	Contributor: Gia Huy Hoang with help of GC
+	Email: e1800961@edu.vamk.fi
 
-7. Credits and Acknowledgements
+7. Credits and Acknowledgements:
+	Special thank to Doctor Gao Chao for helping me to complete this project
+	
